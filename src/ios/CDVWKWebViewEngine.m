@@ -269,11 +269,8 @@ static void * KVOContext = &KVOContext;
         decelerationSetting = [settings cordovaSettingForKey:@"UIWebViewDecelerationSpeed"];
     }
 
-    if (![@"fast" isEqualToString:decelerationSetting]) {
-        [wkWebView.scrollView setDecelerationRate:UIScrollViewDecelerationRateNormal];
-    } else {
-        [wkWebView.scrollView setDecelerationRate:UIScrollViewDecelerationRateFast];
-    }
+    BOOL directionalLockEnabled = [settings cordovaBoolSettingForKey:@"DirectionalLockEnabled" defaultValue:YES];
+    wkWebView.scrollView.directionalLockEnabled = directionalLockEnabled;
 
     wkWebView.allowsBackForwardNavigationGestures = [settings cordovaBoolSettingForKey:@"AllowBackForwardNavigationGestures" defaultValue:NO];
 }
